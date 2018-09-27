@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="test" packages="ru.yandex.money.common.logging,log4j.extensions">
+
+    <Properties>
+        <Property name="format">[%d{yyyy-MM-dd'T'HH:mm:ss.SSSZZZ}{GMT+3}] %-5p [%X{traceId},%X{spanParentId},%X{spanId},%X{spanName}] [%t] [%c{1}] %m%n%ex
+        </Property>
+    </Properties>
+
+    <ThresholdFilter level="INFO"/>
+
+    <Appenders>
+        <Console name="STDOUT">
+            <PatternLayout pattern="${format}"/>
+        </Console>
+        <TraceableLogAppender name="TEST">
+            <PatternLayout pattern="${format}"/>
+        </TraceableLogAppender>
+    </Appenders>
+
+    <Loggers>
+        <Root level="DEBUG">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+
+        <logger name="ru.yandex.money" level="debug">
+            <AppenderRef ref="TEST"/>
+        </logger>
+
+    </Loggers>
+</Configuration>
