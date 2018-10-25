@@ -7,12 +7,12 @@ groupIdSuffix = "common"
 artifactID = "yamoney-log4j-count-appender"
 
 dependencies {
-    compile 'org.apache.logging.log4j:log4j-core:2.7'
+    compile 'org.apache.logging.log4j:log4j-core:2.10.0'
 
     optional 'com.google.code.findbugs:jsr305:3.0.1',
             'com.google.code.findbugs:annotations:3.0.1'
 
-    testCompile 'org.testng:testng:6.10'
+    testCompile 'org.testng:testng:6.14.3'
 }
 
 buildscript {
@@ -23,10 +23,9 @@ buildscript {
         maven { url 'https://nexus.yamoney.ru/content/repositories/jcenter.bintray.com/' }
 
         dependencies {
-            classpath 'net.researchgate:gradle-release:2.3.0'
-            classpath group: 'ru.yandex.money.platform', name: 'yamoney-libraries-dependencies', version: '2.+', ext: 'zip'
-            classpath 'ru.yandex.money.gradle.plugins:yamoney-library-project-plugin:1.1.+'
-            classpath 'ru.yandex.money.gradle.plugins:yamoney-check-dependencies-plugin:2.+'
+            classpath 'net.researchgate:gradle-release:2.4.0'
+            classpath group: 'ru.yandex.money.platform', name: 'yamoney-libraries-dependencies', version: '3.+', ext: 'zip'
+            classpath 'ru.yandex.money.gradle.plugins:yamoney-library-project-plugin:1.+'
         }
     }
 }
@@ -37,9 +36,10 @@ dependencyManagement {
 
     // Фиксируем версии библиотек
     imports {
-        mavenBom 'ru.yandex.money.platform:yamoney-libraries-dependencies:2.+'
+        mavenBom 'ru.yandex.money.platform:yamoney-libraries-dependencies:3.+'
     }
 }
 
 // Исключаем из проверки согласованности версий библиотек следующие конфигурации:
 checkDependencies.excludedConfigurations = ["checkstyle", "errorprone", "optional", "findbugs"]
+checkDependencies.exclusionsRulesSources = ['ru.yandex.money.platform:yamoney-libraries-dependencies']
