@@ -125,12 +125,12 @@ bintray {
         name = 'log4j-count-appender'
         repo = 'maven'
         userOrg = 'yandex-money-tech'
-        desc = 'DSL in kotlin language for generating Grafana dashboards'
+        desc = 'Log4j Appender for aggregating log events by level'
         websiteUrl = 'https://github.com/yandex-money-tech/log4j-count-appender'
         issueTrackerUrl = 'https://github.com/yandex-money-tech/log4j-count-appender/issues'
         vcsUrl = 'https://github.com/yandex-money-tech/log4j-count-appender.git'
         licenses = ['MIT']
-        labels = ['log4j', 'java']
+        labels = ['log4j', 'java', 'statsd']
         publicDownloadNumbers = true
         githubRepo = 'yandex-money-tech/log4j-count-appender'
         githubReleaseNotesFile = 'CHANGELOG.md'

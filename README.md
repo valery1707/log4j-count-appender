@@ -35,14 +35,16 @@ SocketLogLevelCountAppender собирает статистику количес
 - protocol - UDP или TCP
 - sendPeriod - период отправки, мс
 
-# How To Build
+# Сборка проекта
 
-You can look at Travis (`.travis.yml`) or AppVeyor (`appveyor.yml`) configuration. 
-We have two gradle build files. There are `build.gradle`, `gradlew`, `gradle/wrapper` for Yandex.Money infrastructure and
-`build-public.gradle`, `gradlew-public`, `gradle-public/wrapper` for configuration outside of private network.
+См. конфигурации Travis (`.travis.yml`) или AppVeyor (`appveyor.yml`).
+В репозитории находятся два gradle-проекта:
+- файлы `build.gradle`, `gradlew`, `gradle/wrapper` относятся к проекту для работы во внутренней инфраструктуре Яндекс.Денег;
+- файлы `build-public.gradle`, `gradlew-public`, `gradle-public/wrapper` относятся к проекту для работы извне.
 
-# How To Import Project in IDE
+# Импорт проекта в IDE
 
-Unfortunately, there is a bug in IntelliJ IDEA (https://github.com/f0y/idea-two-gradle-builds) so you have to replace 
-`gradle-public/wrapper/gradle-wrapper.properties` with `gradle/wrapper/gradle-wrapper.properties` and 
-`build-public.gradle` with `build.gradle` before importing. 
+К сожалению на данный момент необходимо перед импортом проекта в Idea заменить файлы:
+- `gradle-public/wrapper/gradle-wrapper.properties` на `gradle/wrapper/gradle-wrapper.properties`,
+- `build-public.gradle` with `build.gradle`.
+Это вызвано багом в Idea: https://github.com/f0y/idea-two-gradle-builds.
