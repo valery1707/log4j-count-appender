@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+## [1.1.2]() (27-11-2018)
+
+* chmod +x для gradlew-public и publish_doc.sh
+
 ## [1.1.1]() (26-11-2018)
 
 * gradle-конфигурация для github
