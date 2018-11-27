@@ -1,3 +1,11 @@
+[![Build Status](https://travis-ci.org/yandex-money-tech/log4j-count-appender.svg?branch=master)](https://travis-ci.org/yandex-money-tech/log4j-count-appender)
+[![Build status](https://ci.appveyor.com/api/projects/status/2ee4wumomugjnnl7?svg=true)](https://ci.appveyor.com/project/f0y/log4j-count-appender)
+[![codecov](https://codecov.io/gh/yandex-money-tech/log4j-count-appender/branch/master/graph/badge.svg)](https://codecov.io/gh/yandex-money-tech/log4j-count-appender)
+[![Codebeat](https://codebeat.co/badges/ff7a4c21-72fb-446c-b245-ba739240fe49)](https://codebeat.co/projects/github-com-yandex-money-log4j-count-appender-master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Javadoc](https://img.shields.io/badge/javadoc-latest-blue.svg)](https://yandex-money-tech.github.io/log4j-count-appender/)
+[![Download](https://api.bintray.com/packages/yandex-money-tech/maven/log4j-count-appender/images/download.svg)](https://bintray.com/yandex-money-tech/maven/log4j-count-appender/_latestVersion)
+
 # Appender для подсчета количества логов и отправки в сокет
 
 SocketLogLevelCountAppender собирает статистику количества событий **LogEvent**, агрегируя по уровню **level**.
@@ -34,6 +42,18 @@ SocketLogLevelCountAppender собирает статистику количес
 - port - порт для отправки пакетов
 - protocol - UDP или TCP
 - sendPeriod - период отправки, мс
+
+# Подключение
+
+Библиотека доступна в [Bintray's JCenter repository](http://jcenter.bintray.com) 
+
+```
+<dependency>
+  <groupId>com.yandex.money.tech</groupId>
+  <artifactId>log4j-count-appender</artifactId>
+  <version>1.1.3</version>
+</dependency>
+```
 
 # Сборка проекта
 
