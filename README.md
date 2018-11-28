@@ -8,6 +8,22 @@
 
 # Appender для подсчета количества логов и отправки в сокет
 
+## Зачем
+
+Этот Log Appender полезен для случаев, когда необходимо настроить сбор статистики по количеству логов приложения. 
+Вот несколько примеров, как можно использовать эту статистику:
+- обнаруживать аномалии при слишком высоком или слишком низком количестве логов приложения;
+- оперативно реагировать на рост логов определнного уровня, таких как WARN и ERROR.
+
+Один из способов собирать такую статистику - это использовать `org.apache.logging.log4j.core.appender.SocketAppender`, однако
+его недостаток в том, что он будет слать в сокет по одному событию на каждую запись в лог, что может излишне нагружать сеть и приемник событий
+при высоком темпе добвление логов.
+
+Поэтому был создан этот Log Appender, который агрегирует записи в лог и с фиксированной периодичностью пишет в сокет по одному событию с
+количеством записей лога на определенном уровне.
+
+## Как работает
+
 SocketLogLevelCountAppender собирает статистику количества событий **LogEvent**, агрегируя по уровню **level**.
 С заданной периодичностью происходит запись в сокет событий, содержащих:
 - уровень логирования **level**,
@@ -17,9 +33,21 @@ SocketLogLevelCountAppender собирает статистику количес
 при нагрузке в 100000 событий за 100мс по одному level. Это обусловлено использованием ```LongAdder#sumThenReset()```.
 
 Формат сообщений, попадающих в сокет, следует задавать с помощью PatternLayout, в шаблоне которого
-можно использовать параметры **%level** и **%X{count}**. 
+можно использовать параметры **%level** и **%X{count}**.
 
-Здесь приведен пример конфигурации для отправки метрик в statsd по UDP:
+## Как подключить 
+
+Библиотека доступна в [Bintray's JCenter repository](http://jcenter.bintray.com) 
+
+```
+<dependency>
+  <groupId>com.yandex.money.tech</groupId>
+  <artifactId>log4j-count-appender</artifactId>
+  <version>1.1.3</version>
+</dependency>
+```
+
+Здесь приведен пример конфигурации `log4j2.xml` для отправки метрик в statsd по UDP:
 ```$xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration ... packages="ru.yandex.money.logging.log4j.appender">
@@ -36,24 +64,12 @@ SocketLogLevelCountAppender собирает статистику количес
 </Configuration>
 ```
 
-Список возможных параметров элемента SocketLogLevelCount:
+Список возможных параметров элемента `SocketLogLevelCount`:
 - connectTimeout - таймаут установки соединения, мс
 - host - хост для отправки пакетов
 - port - порт для отправки пакетов
 - protocol - UDP или TCP
 - sendPeriod - период отправки, мс
-
-# Подключение
-
-Библиотека доступна в [Bintray's JCenter repository](http://jcenter.bintray.com) 
-
-```
-<dependency>
-  <groupId>com.yandex.money.tech</groupId>
-  <artifactId>log4j-count-appender</artifactId>
-  <version>1.1.3</version>
-</dependency>
-```
 
 # Сборка проекта
 
@@ -66,5 +82,5 @@ SocketLogLevelCountAppender собирает статистику количес
 
 К сожалению на данный момент необходимо перед импортом проекта в Idea заменить файлы:
 - `gradle-public/wrapper/gradle-wrapper.properties` на `gradle/wrapper/gradle-wrapper.properties`,
-- `build-public.gradle` with `build.gradle`.
+- `build-public.gradle` на `build.gradle`.
 Это вызвано багом в Idea: https://github.com/f0y/idea-two-gradle-builds.
